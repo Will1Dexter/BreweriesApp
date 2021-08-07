@@ -1,0 +1,16 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Moe</mat-card-title>
+    <mat-card-subtitle>Bartender at Moe's Tavern</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="../../../assets/sair.jpg">
+  <mat-card-content>
+    <p>{{ data.mensagem }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="sair()" cdkFocusInitial>Ta bom, eu espero!</button>
+    <button mat-button (click)="sair()">Ok</button>
+  </mat-card-actions>
+</mat-card>
+

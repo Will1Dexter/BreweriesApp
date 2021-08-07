@@ -1,0 +1,87 @@
+<mat-card class="titulo">
+  <div class="texto">
+    KT de Caching
+  </div>
+  <div class="logo">
+    <div>
+      <img width="108.3" height="90%" src="../../../assets/logo.png" />
+    </div>
+  </div>
+</mat-card>
+
+<mat-progress-bar
+  [mode]="loading ? 'indeterminate' : 'determinate'"
+  [value]="loading ? null : 100"
+  color="warn"
+></mat-progress-bar>
+
+<mat-card>
+  <div class="label">Cervejarias:</div>
+  <mat-accordion>
+    <mat-expansion-panel
+      *ngFor="let cervejaria of cervejarias"
+      class="cervejarias"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="linha">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            class="pedir-cerveja"
+          >
+            store
+          </mat-icon>
+          <div class="nome-cervejaria">
+            {{ cervejaria.name }}
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Cidade: {{ cervejaria.city }}</p>
+      <p>Estado: {{ cervejaria.state }}</p>
+      <p>Pais : {{ cervejaria.country }}</p>
+      <p>
+        <button
+          mat-raised-button
+          class="buscar"
+          color="primary"
+          (click)="pedirCerveja(cervejaria.id)"
+        >
+          <mat-icon svgIcon="beer"></mat-icon>
+          Pedir uma Cerveja
+        </button>
+        <span class="contador-cervejas">
+          {{
+            contadorCervejas == 0
+              ? "Você ainda não bebeu nada."
+              : contadorCervejas == 1
+              ? "Você bebeu apenas 1 cerveja."
+              : "Você já bebeu " + contadorCervejas + " cervejas!"
+          }}
+        </span>
+      </p>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <section class="secao-acoes">
+    <div class="label">Buscar Cervejarias:</div>
+    <div class="linha">
+      <button
+        mat-raised-button
+        class="buscar"
+        color="accent"
+        (click)="listarCervejarias(true)"
+      >
+        Com Cache
+      </button>
+      <button
+        mat-raised-button
+        class="buscar"
+        color="warn"
+        (click)="listarCervejarias(false)"
+      >
+        Sem Cache
+      </button>
+    </div>
+  </section>
+</mat-card>

@@ -1,0 +1,52 @@
+
+.titulo {
+    width: calc(100% - 32px);
+    .texto {
+        display: flex;
+        justify-content: center;
+        width: calc(100% - 40px);
+        font-family: Roboto, Arial, sans-serif;
+        font-size: large;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .logo {
+        display: flex;
+        justify-content: center;
+        width: calc(100% - 40px);
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+.cervejarias {
+    background-color: #757575;
+    .nome-cervejaria {
+        width: calc(100% - 52px);
+        display: flex;
+        justify-content: center;
+    }
+    .pedir-cerveja {
+        margin-right: 16px;
+    }
+    .contador-cervejas {
+        padding-left: 10px;
+    }
+}
+
+.label {
+    margin-bottom: 10px;
+}
+
+.secao-acoes {
+    padding-top: 10px;
+    width: 100%;
+}
+
+.linha {
+    display: flex;
+    .buscar {
+        margin-right: 10px;
+    }
+}

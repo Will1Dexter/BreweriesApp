@@ -1,0 +1,17 @@
+.example-header-image {
+    background-image: url('../../../assets/moe.png');
+    background-size: cover;
+}
+
+.crop {
+    width: 280px;
+    height: 215px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 400px;
+    height: 300px;
+    margin: -71px 0 0 -63px;
+}
+

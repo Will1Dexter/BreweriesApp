@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Breweries.Interfaces;
+using Breweries.Middleware;
 using Breweries.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using StackExchange.Redis;
 
 namespace Breweries
 {
@@ -38,6 +40,20 @@ namespace Breweries
                     });
             });
 
+            services.AddResponseCaching();
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.InstanceName = "redis";
+                options.Configuration = "localhost:6379";
+            });
+
+            services.AddSingleton<IConnectionMultiplexer>(i => ConnectionMultiplexer.Connect("localhost:6379"));
 
             services.AddScoped<IBreweriesRepository, BreweriesRepository>();
 
@@ -58,7 +74,11 @@ namespace Breweries
 
             app.UseCors();
 
+            app.UseResponseCaching();
+
             app.UseAuthorization();
+
+            app.UseMiddleware<RequestThrottlingMiddleware>(3);
 
             app.UseEndpoints(endpoints =>
             {

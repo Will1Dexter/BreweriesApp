@@ -38,6 +38,13 @@ namespace Breweries
                     });
             });
 
+            services.AddResponseCaching();
+
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.InstanceName = "redis";
+                options.Configuration = "localhost:6379";
+            });
 
             services.AddScoped<IBreweriesRepository, BreweriesRepository>();
 
@@ -57,6 +64,8 @@ namespace Breweries
             app.UseRouting();
 
             app.UseCors();
+
+            app.UseResponseCaching();
 
             app.UseAuthorization();
 

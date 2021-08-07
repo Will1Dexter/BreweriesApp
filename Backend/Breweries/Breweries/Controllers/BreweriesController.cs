@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Breweries.Filters;
 using Breweries.Interfaces;
 using Breweries.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,8 @@ namespace Breweries.Controllers
         }
 
         [HttpGet]
+        [ETagFilter]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.Client)]
         public async Task<IActionResult> Get(bool cached = true)
         {
             IEnumerable<Brewery> breweries;

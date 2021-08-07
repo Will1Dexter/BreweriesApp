@@ -38,6 +38,8 @@ namespace Breweries
                     });
             });
 
+            services.AddResponseCaching();
+
             services.AddStackExchangeRedisCache(options =>
             {
                 options.InstanceName = "redis";
@@ -62,6 +64,8 @@ namespace Breweries
             app.UseRouting();
 
             app.UseCors();
+
+            app.UseResponseCaching();
 
             app.UseAuthorization();
 
